@@ -7,6 +7,8 @@ import 'package:realmen_customer_application/features/data/shared_preferences/au
 
 abstract class IBookingRepository {
   Future<Map<String, dynamic>> submitBooking(BookingModel bookingModel);
+  Future<Map<String, dynamic>> GetAllBooking(
+      String to, String from, String? statusCode);
 }
 
 class BookingRepository extends ApiEndpoints implements IBookingRepository {
@@ -27,6 +29,38 @@ class BookingRepository extends ApiEndpoints implements IBookingRepository {
               },
               body: bookingModel.toJson())
           .timeout(const Duration(seconds: 180));
+      return processResponse(response);
+    } catch (e) {
+      if (e is NotFoundException) {
+        return {
+          "status": false,
+          "message": e.message.toString(),
+          "statusCode": 404
+        };
+      } else {
+        return ExceptionHandlers().getExceptionString(e);
+      }
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> GetAllBooking(
+      String to, String from, String? statusCode) async {
+    try {
+      final String jwtToken = AuthPref.getToken().toString();
+
+      Uri uri = Uri.parse(
+          "$BookingServiceUrl?timeRange=$to&timeRange=$from&statusCodes=${statusCode != null ? statusCode : ''}&bookingId=&staffId=&current=&pageSize=");
+      final client = http.Client();
+      final response = await client.get(
+        uri,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Accept': '*/*',
+          'Authorization': 'Bearer $jwtToken'
+        },
+      ).timeout(const Duration(seconds: 180));
       return processResponse(response);
     } catch (e) {
       if (e is NotFoundException) {

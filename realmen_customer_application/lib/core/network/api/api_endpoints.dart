@@ -20,4 +20,5 @@ class ApiEndpoints {
 
   //$ Booking API $//
   final String BookingUrl = "$domainUrl/mobile/booking";
+  final String BookingServiceUrl = "$domainUrl/mobile/booking-service";
 }

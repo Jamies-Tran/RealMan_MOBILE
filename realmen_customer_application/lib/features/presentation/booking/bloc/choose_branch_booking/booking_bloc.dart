@@ -54,6 +54,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     on<ChooseBranchBookingSelectedBranchEvent>(
         _chooseBranchBookingSelectedBranchEvent);
 
+    // choose service
     on<BookingShowServiceEvent>(_bookingShowServiceEvent);
     on<ChooseBranchBookingSelectServiceGetBackEvent>(
         _chooseBranchBookingSelectServiceGetBackEvent);
@@ -345,12 +346,12 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
         if (element.shopCategoryCode == "HAIRCUT") {
           _selectedDailyPlanServicesStylist.addAll(_selectedDailyPlan
               .dailyPlanServices!
-              .where((e) => e.shopServiceId == element.shopServiceId)
+              .where((e) => e.branchServiceId == element.branchServiceId)
               .toList());
         } else {
           _selectedDailyPlanServicesMassur.addAll(_selectedDailyPlan
               .dailyPlanServices!
-              .where((e) => e.shopServiceId == element.shopServiceId)
+              .where((e) => e.branchServiceId == element.branchServiceId)
               .toList());
         }
       }
@@ -602,7 +603,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
           for (DailyPlanServiceModel selectedServiceStylist
               in _selectedDailyPlanServicesStylist) {
             BookingServiceModel bookingServiceModel = BookingServiceModel(
-                serviceId: selectedServiceStylist.dailyPlanServiceId!,
+                dailyPlanServiceId: selectedServiceStylist.dailyPlanServiceId!,
                 staffId: staffId,
                 beginAtReq: beginAt);
             bookingServices.add(bookingServiceModel);
@@ -612,7 +613,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
           for (DailyPlanServiceModel selectedServiceMassur
               in _selectedDailyPlanServicesMassur) {
             BookingServiceModel bookingServiceModel = BookingServiceModel(
-                serviceId: selectedServiceMassur.dailyPlanServiceId!,
+                dailyPlanServiceId: selectedServiceMassur.dailyPlanServiceId!,
                 staffId: 0,
                 beginAtReq: beginAt);
             bookingServices.add(bookingServiceModel);
@@ -620,6 +621,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
         }
         BookingModel bookingSubmit = BookingModel(
             branchId: _selectedBranch!.branchId!,
+            dailyPlanId: _selectedDailyPlanId,
             bookingServices: bookingServices);
         var bookings = await bookingRepository.submitBooking(bookingSubmit);
         var bookingsStatus = bookings["status"];

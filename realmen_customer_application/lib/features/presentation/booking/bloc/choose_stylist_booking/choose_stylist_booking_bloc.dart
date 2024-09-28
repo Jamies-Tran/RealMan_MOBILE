@@ -457,7 +457,7 @@ class ChooseStylistBookingBloc
           for (ServiceDataModel selectedServiceStylist
               in _selectedServicesStylist) {
             BookingServiceModel bookingServiceModel = BookingServiceModel(
-                serviceId: selectedServiceStylist.shopServiceId!,
+                dailyPlanServiceId: selectedServiceStylist.shopServiceId!,
                 staffId: staffId,
                 beginAtReq: beginAt);
             bookingServices.add(bookingServiceModel);
@@ -467,7 +467,7 @@ class ChooseStylistBookingBloc
           for (ServiceDataModel selectedServicesMassur
               in _selectedServicesMassur) {
             BookingServiceModel bookingServiceModel = BookingServiceModel(
-                serviceId: selectedServicesMassur.shopServiceId!,
+                dailyPlanServiceId: selectedServicesMassur.shopServiceId!,
                 staffId: 0,
                 beginAtReq: beginAt);
             bookingServices.add(bookingServiceModel);
@@ -476,6 +476,7 @@ class ChooseStylistBookingBloc
         BookingModel bookingSubmit = BookingModel(
             branchId: 1,
             // branchId: _selectedBranch!.branchId!,
+            dailyPlanId: _selectedDailyPlanId,
             bookingServices: bookingServices);
         var bookings = await bookingRepository.submitBooking(bookingSubmit);
         var bookingsStatus = bookings["status"];

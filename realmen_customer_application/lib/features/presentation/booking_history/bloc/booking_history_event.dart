@@ -6,3 +6,5 @@ sealed class BookingHistoryEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class BookingHistoryInitialEvent extends BookingHistoryEvent {}

@@ -8,7 +8,7 @@ class DailyPlanServiceModel extends Equatable {
   int? dailyPlanId;
   int? weeklyPlanId;
   int? branchId;
-  int? shopServiceId;
+  int? branchServiceId;
   String? shopServiceName;
   int? branchServicePrice;
   String? serviceAssignmentCode;
@@ -24,7 +24,7 @@ class DailyPlanServiceModel extends Equatable {
     this.dailyPlanId,
     this.weeklyPlanId,
     this.branchId,
-    this.shopServiceId,
+    this.branchServiceId,
     this.shopServiceName,
     this.branchServicePrice,
     this.serviceAssignmentCode,
@@ -42,7 +42,7 @@ class DailyPlanServiceModel extends Equatable {
         dailyPlanId,
         weeklyPlanId,
         branchId,
-        shopServiceId,
+        branchServiceId,
         shopServiceName,
         branchServicePrice,
         serviceAssignmentCode,
@@ -60,7 +60,7 @@ class DailyPlanServiceModel extends Equatable {
       'dailyPlanId': dailyPlanId,
       'weeklyPlanId': weeklyPlanId,
       'branchId': branchId,
-      'shopServiceId': shopServiceId,
+      'branchServiceId': branchServiceId,
       'shopServiceName': shopServiceName,
       'branchServicePrice': branchServicePrice,
       'serviceAssignmentCode': serviceAssignmentCode,
@@ -83,8 +83,8 @@ class DailyPlanServiceModel extends Equatable {
       weeklyPlanId:
           map['weeklyPlanId'] != null ? map['weeklyPlanId'] as int : null,
       branchId: map['branchId'] != null ? map['branchId'] as int : null,
-      shopServiceId:
-          map['shopServiceId'] != null ? map['shopServiceId'] as int : null,
+      branchServiceId:
+          map['branchServiceId'] != null ? map['branchServiceId'] as int : null,
       shopServiceName: map['shopServiceName'] != null
           ? map['shopServiceName'] as String
           : null,

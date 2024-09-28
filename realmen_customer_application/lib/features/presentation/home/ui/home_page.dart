@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:realmen_customer_application/features/data/shared_preferences/auth_pref.dart';
+import 'package:realmen_customer_application/features/presentation/booking_history/ui/booking_history_page.dart';
 import 'package:realmen_customer_application/features/presentation/home/bloc/home_page_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -343,6 +344,8 @@ class _HomePageState extends State<HomePage> {
                                       () {
                                         // Get.toNamed(HistoryBookingScreen
                                         //     .HistoryBookingScreenRoute);
+                                        Get.to(
+                                            () => const HistoryBookingScreen());
                                       },
                                     ),
                                     cardHolder(
